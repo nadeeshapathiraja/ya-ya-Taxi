@@ -103,6 +103,7 @@ error_reporting(0);
 									<th>Price</th>
 									<th>Passengers</th>
 									<th>Suitcases</th>
+									<th>Select Vehical</th>
 								</tr>
 							";
 							
@@ -118,6 +119,7 @@ error_reporting(0);
 													<td>$row[2]</td>
 													<td>$row[3]</td>
 													<td>$row[4]</td>
+													<td><input type="button" name="selectVehical" value="Select" onclick="window.location.href='http://localhost/Rider%20Project/contactdetails.php'/></td>
 												</tr>
 											";
 										}
