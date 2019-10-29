@@ -84,6 +84,8 @@ if(isset($_POST['submit'])){
 		        	<input type="text" name="distance" placeholder="Total Distance" value="" />
 		         	<input type="text" name="duratoin" placeholder="Total Duration" value="" />
 		        </div>
+
+		        <script>history.pushState({}, "", "")</script>
 		         
 	 
 		    </form>

@@ -3,12 +3,29 @@ error_reporting(0);
 
 	if (isset($_POST['submit'])) {
 
+		error_reporting(0);
 
 		$pasengers = $_POST['pasengers'];
 		$suitcases = $_POST['suitcases'];
 
+
+		$hostname= "localhost";
+		$username="root";
+		$password="";
+		
+		$con = mysqli_connect($hostname,$username,$password);
+		
+		$database=mysqli_select_db($con,"taxi");
+
+		$sql="INSERT INTO contact (pasengers,suitcases) VALUES('$pasengers','$suitcases')";
+		
+		$result=mysqli_query($con,$sql);
+		
+		mysqli_close($con);
+
+		
+		
 	}
-					 
 ?>
 
 <html lang="en">
@@ -82,8 +99,21 @@ error_reporting(0);
 		        </script>
 
 		        <div id="vehicalTable">
-		        	<?php
-		        	error_reporting(0);
+
+		        	<table class="table table-dark">
+
+					  <thead>
+					    <tr>
+					      <th scope="col">Image</th>
+					      <th scope="col">Price</th>
+					      <th scope="col">Passengers</th>
+					      <th scope="col">Suitcases</th>
+					      <th scope="col">Select Vehical</th>
+					    </tr>
+					  </thead>
+
+				<?php
+		        	//error_reporting(0);
 
 						$hostname= "localhost";
 						$username="root";
@@ -96,42 +126,39 @@ error_reporting(0);
 							$sql="SELECT * FROM vehical";
 
 							$result= mysqli_query($con,$sql);
-							echo "
-							<table border=1>
-								<tr>
-									<th>Image</th>
-									<th>Price</th>
-									<th>Passengers</th>
-									<th>Suitcases</th>
-									<th>Select Vehical</th>
-								</tr>
-							";
 							
-								
 								while($row=mysqli_fetch_array($result)){
 
 									if($row[3]>$pasengers){
 										if($row[4]>$suitcases){
 											echo "
+											<tbody>
+
 												<tr>
-										
-													<td><img src=images/$row[1] width=100px height=100px/><br/></td>
-													<td>$row[2]</td>
-													<td>$row[3]</td>
-													<td>$row[4]</td>
-													<td><input type="button" name="selectVehical" value="Select" onclick="window.location.href='http://localhost/Rider%20Project/contactdetails.php'/></td>
-												</tr>
-											";
+												    <th><img src=images/$row[1] width=100px height=100px/></th>
+												    <td>$row[2]</td>
+												    <td>$row[3]</td>
+												    <td>$row[4]</td>
+												    <td><button name='selectedVehical' onclick = window.location.href='http://localhost/Rider%20Project/contactdetails.php'>Select</button></td>
+												</tr>  
+												  
+											</tbody>";
 										}
 
 									}
 									
 								
-							}
-								
-							echo "</table>";
-						?>
+								}
+	
+				?>
+
+					  
+
+					</table>
+
 		        </div>
+
+		        <script>history.pushState({}, "", "")</script>
 
 		</form>
 		</div>
